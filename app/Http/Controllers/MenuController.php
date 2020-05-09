@@ -20,6 +20,8 @@ class MenuController extends Controller
         return $this->respondWithError('There are no items in the menu',404);
        }
 
-       return $this->respondWithSuccess(['data' => $menu]);
+       $store_info = ['delivery_cost'=>env('DELIVERY_COST'),'EUR_TO_USD'=>env('EUR_TO_USD')];
+       
+       return $this->respondWithSuccess(['data' => $menu,'store_info'=>$store_info]);
     }
 }
