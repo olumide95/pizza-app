@@ -4,9 +4,15 @@ namespace App\Exceptions;
 
 use Exception;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use Illuminate\Auth\Access\AuthorizationException;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Illuminate\Validation\ValidationException;
+use Symfony\Component\HttpKernel\Exception\HttpException;
+use Illuminate\Http\JsonResponse;
 
 class Handler extends ExceptionHandler
 {
+    const HTTP_UNPROCESSABLE_ENTITY = 422;
     /**
      * A list of the exception types that are not reported.
      *
@@ -46,6 +52,49 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Exception $exception)
     {
+         if ($request->is('api/*')) {
+            return $this->handleAPIExceptions($request, $exception);
+        }
         return parent::render($request, $exception);
+    }
+
+    /**
+     * @param $request
+     * @param $exception
+     *
+     * @return \Illuminate\Http\Response|mixed
+     */
+    private function handleAPIExceptions($request, $exception)
+    {
+
+        $status_code = $exception->getStatusCode();
+
+        if ($exception instanceof HttpException) {
+            return $this->respondWithError(JsonResponse::$statusTexts[$status_code], $status_code);
+        } else if ($exception instanceof ValidationException) {
+            $error = collect($exception->validator->getMessageBag())->flatten();
+            return $this->respondWithError($error, self::HTTP_UNPROCESSABLE_ENTITY);
+        }
+
+        return parent::render($request, $exception);
+    }
+
+    /**
+     * Respond with a generic error
+     *
+     * @param string $message
+     * @param $status_code
+     *
+     * @return mixed
+     */
+    public function respondWithError($message, $status_code)
+    {
+        return response()->json([
+            'error' => [
+                'error' => true,
+                'message' => $message,
+                'status_code' => $status_code
+            ]
+        ], $status_code);
     }
 }
