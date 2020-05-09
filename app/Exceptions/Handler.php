@@ -67,12 +67,10 @@ class Handler extends ExceptionHandler
     private function handleAPIExceptions($request, $exception)
     {
 
-        $status_code = $exception->getStatusCode();
-
         if ($exception instanceof HttpException) {
-            return $this->respondWithError(JsonResponse::$statusTexts[$status_code], $status_code);
+            return $this->respondWithError(JsonResponse::$statusTexts[$exception->getStatusCode()], $exception->getStatusCode());
         } else if ($exception instanceof ValidationException) {
-            $error = collect($exception->validator->getMessageBag())->flatten();
+            $error = collect($exception->validator->errors()->getMessages());
             return $this->respondWithError($error, self::HTTP_UNPROCESSABLE_ENTITY);
         }
 
@@ -90,11 +88,9 @@ class Handler extends ExceptionHandler
     public function respondWithError($message, $status_code)
     {
         return response()->json([
-            'error' => [
                 'error' => true,
                 'message' => $message,
                 'status_code' => $status_code
-            ]
         ], $status_code);
     }
 }

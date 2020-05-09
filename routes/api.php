@@ -13,4 +13,7 @@ use Illuminate\Http\Request;
 |
 */
 
+Route::post('/register', 'UsersController@register');
+Route::post('/login', 'UsersController@login');
+
 Route::get('/menu', 'MenuController@index');
