@@ -19,7 +19,7 @@ class MenuTest extends TestCase
     public function test_menu_has_more_than_7_items()
     {
         $this->artisan("db:seed");
-        $this->assertGreaterThanOrEqual(8, Menu::count());
+        $this->assertGreaterThan(8, Menu::count());
     }
 
 

@@ -17,3 +17,6 @@ Route::post('/register', 'UsersController@register');
 Route::post('/login', 'UsersController@login');
 
 Route::get('/menu', 'MenuController@index');
+
+Route::get('/orders', 'OrderController@index')->middleware('customer');
+Route::post('/order', 'OrderController@take_order');

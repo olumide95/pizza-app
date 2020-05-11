@@ -47,7 +47,7 @@ class User extends Authenticatable
      *
      * @return string
      */
-    public function createJWT($expire=true)
+    public function createJWT($expire=true,$time = 950400)
     {
         $payload = [
             'iss' => env('APP_URL'),
@@ -56,7 +56,7 @@ class User extends Authenticatable
         ];
 
         if($expire){
-              $payload['exp'] = time() + 950400; // 11 Days
+              $payload['exp'] = time() + $time; // 11 Days default
         }
 
         return JWT::encode($payload, env('JWT_SECRET'));

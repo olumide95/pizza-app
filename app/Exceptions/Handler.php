@@ -68,10 +68,14 @@ class Handler extends ExceptionHandler
     {
 
         if ($exception instanceof HttpException) {
+
             return $this->respondWithError(JsonResponse::$statusTexts[$exception->getStatusCode()], $exception->getStatusCode());
+       
         } else if ($exception instanceof ValidationException) {
+
             $error = collect($exception->validator->errors()->getMessages());
             return $this->respondWithError($error, self::HTTP_UNPROCESSABLE_ENTITY);
+            
         }
 
         return parent::render($request, $exception);

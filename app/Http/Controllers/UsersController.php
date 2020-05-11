@@ -36,7 +36,7 @@ class UsersController extends Controller
         $user = User::where('email',$request->email)->first();
 
         return $this->respondWithSuccess([
-            'message' => 'Authentication successful',
+            'message' => 'Login successful!',
             'user' => $user,
             'token' => $user->createJWT()
         ]);
@@ -75,7 +75,7 @@ class UsersController extends Controller
         }
       
         return $this->respondWithSuccess([
-            'message' => 'Customer Created Successfully',
+            'message' => 'Registration Successful!',
             'user' => $user,
             'token' => $user->createJWT()
 
