@@ -1,3 +1,8 @@
+## ENVIRONMENT CONFIGURATION REQUIRED
+EUR_TO_USD - Conversion rate
+JWT_SECRET - JWT secret for token encode-decode
+DELIVERY_COST- delivery cost
+
 <p align="center"><img src="https://laravel.com/assets/img/components/logo-laravel.svg"></p>
 
 <p align="center">
