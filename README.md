@@ -4,7 +4,8 @@ JWT_SECRET - JWT secret for token encode-decode <br>
 DELIVERY_COST- delivery cost<br>
 
 ## INSTALLATION
-php artisan migrate --seed<br>
+### `composer install`
+### `php artisan migrate --seed`
 
 ## RUNING THE APPLICATION
 In the project directory, you can run:
