@@ -14,5 +14,9 @@ In the project directory, you can run:
 Runs the app in the development mode.<br />
 Open [http://127.0.0.1:8000/api](http://127.0.0.1:8000/api) to view it in the browser.
 
+## RUNING TESTS
+In the project directory, you can run:
+./vendor/bin/phpunit 
+
 ## DOCUMENTATION
 https://documenter.getpostman.com/view/8571350/Szmh2cV9
