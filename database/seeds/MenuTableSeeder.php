@@ -103,7 +103,25 @@ class MenuTableSeeder extends Seeder
                 'updated_at' => \Carbon\Carbon::now()
                
             ],
-            
+            [
+                'uuid'=> Str::uuid(),
+                'name' => 'Mimosa',
+                'image' => 'https://cdn.pixabay.com/photo/2016/04/09/09/22/pizza-1317699__480.jpg',
+                'amount' => 20,
+                'created_at' =>  \Carbon\Carbon::now(),
+                'updated_at' => \Carbon\Carbon::now()
+               
+            ],
+            [
+                'uuid'=> Str::uuid(),
+                'name' => 'Tricolore',
+                'image' => 'https://cdn.pixabay.com/photo/2016/06/08/00/03/pizza-1442945__480.jpg',
+                'amount' => 15,
+                'created_at' =>  \Carbon\Carbon::now(),
+                'updated_at' => \Carbon\Carbon::now()
+               
+            ],
+
         ]);
     }
 }
