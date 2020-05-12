@@ -13,6 +13,11 @@ use Illuminate\Http\Request;
 |
 */
 
+
+Route::get('/', function () use ($router) {
+   return response()->json(['status_code' => 200,'message'=>'Pie Pizza API Service Reached.'], 200);
+});
+
 Route::post('/register', 'UsersController@register');
 Route::post('/login', 'UsersController@login');
 
